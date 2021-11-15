@@ -3,6 +3,9 @@ Semi/toric Packing
 
 This repo is for saving the program for calculating, and showing the packing capacity of the Semi/toric.
 
+Intro Page:
+https://math.illinois.edu/research/igl/projects/fall/2021/toric-and-semitoric-packing-capacities
+
 ## The list of functions in utilities.py
 
 def checkConvex(vertices)

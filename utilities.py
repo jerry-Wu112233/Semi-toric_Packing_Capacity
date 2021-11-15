@@ -229,3 +229,7 @@ def show_info(Vertices):
   Coordinates = parse(sl2_length)
   for i in Coordinates:
     show_graph(Vertices,sl2_length, i)
+
+
+if __name__ == "__main__":
+  print("No error, untilites function ready for usage")

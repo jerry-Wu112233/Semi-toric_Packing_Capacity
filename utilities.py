@@ -34,22 +34,22 @@ def scale(vertices):
   return vertices
 
 #To do: figure out how to show image with in a function (may save in local first and display at the end of program)
-def show_graph(Vertices, sl2_length, first, tittle=""):
+def show_graph(Vertices, sl2_length, set, tittle=""):
   order_info = tittle.split(" ")[0]
-  print("{} Vertex Coordinate: {}\t Magnitude: {}".format(order_info ,first, magnitude(first)))
+  print("{} Vertex Coordinate: {}\t Magnitude: {}".format(order_info ,set, magnitude(set)))
   Vertices = Vertices.tolist()
   Vertices.append(Vertices[0]) #repeat the first point to create a 'closed loop'
   xs, ys = zip(*Vertices) #create lists of x and y values
 
-  for i in range(len(first)):
-    if (first[i] != 0):
+  for i in range(len(set)):
+    if (set[i] != 0):
       packing = [Vertices[i]]
 
-      forward = i + 1 if i + 1 < len(first) else 0
-      backward = i - 1 if i - 1 >= 0 else len(first) - 1
+      forward = i + 1 if i + 1 < len(set) else 0
+      backward = i - 1 if i - 1 >= 0 else len(set) - 1
       
-      forward_vertex = np.array(Vertices[i]) + (first[i] / sl2_length[i]) * np.array([Vertices[forward][0] - Vertices[i][0], Vertices[forward][1] - Vertices[i][1]])
-      backward_vertex = np.array(Vertices[i]) + (first[i] / sl2_length[backward]) * np.array([Vertices[backward][0] - Vertices[i][0], Vertices[backward][1] - Vertices[i][1]])
+      forward_vertex = np.array(Vertices[i]) + (set[i] / sl2_length[i]) * np.array([Vertices[forward][0] - Vertices[i][0], Vertices[forward][1] - Vertices[i][1]])
+      backward_vertex = np.array(Vertices[i]) + (set[i] / sl2_length[backward]) * np.array([Vertices[backward][0] - Vertices[i][0], Vertices[backward][1] - Vertices[i][1]])
       packing.append(forward_vertex)
       packing.append(backward_vertex)
       axes = plt.gca()

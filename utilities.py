@@ -34,12 +34,13 @@ def scale(vertices):
   return vertices
 
 #To do: figure out how to show image with in a function (may save in local first and display at the end of program)
-def show_graph(Vertices, sl2_length, first, tittle=""): 
+def show_graph(Vertices, sl2_length, first, tittle=""):
+  order_info = tittle.split(" ")[0]
+  print("{} Vertex Coordinate: {}\t Magnitude: {}".format(order_info ,first, magnitude(first)))
   Vertices = Vertices.tolist()
   Vertices.append(Vertices[0]) #repeat the first point to create a 'closed loop'
   xs, ys = zip(*Vertices) #create lists of x and y values
 
-  #first = max_list[0]
   for i in range(len(first)):
     if (first[i] != 0):
       packing = [Vertices[i]]
@@ -54,10 +55,6 @@ def show_graph(Vertices, sl2_length, first, tittle=""):
       axes = plt.gca()
       axes.add_patch(polygon(packing, closed=True, facecolor='orange'))
 
-  #     print("value of i: {}\n forward:{}\n backward:{}\n packing vertices: {}".format(i, forward, backward, packing))
-  #     print("forward vertices: {}".format(forward_vertex))
-  #     print("backward vertices: {}\n".format(backward_vertex))
-  # print("Vertices: {}\nsl2: {}\n".format(Vertices, sl2_length))
   plt.axis("equal")
   plt.plot(xs,ys) 
   plt.title(tittle)
@@ -68,9 +65,6 @@ def show_graph(Vertices, sl2_length, first, tittle=""):
 #Delzan Section
 #This function verifies the Delzant determinant condition for two edges (three vertices), returning true if the condition is met and false otherwise
 def verifyDelzant(vert, nA, nB):
-  # This breaks if vert == nA or vert == nB as gcd will output zero.
-  # we can check for this, but it may be a waste of time
-
   # compute the edges to compair
   edgeA = nA - vert
   edgeB = vert - nB
@@ -196,13 +190,10 @@ def filter(vertex, SL2):
 
 def parse(SL2_lengths):
   candidate = get_vertex(SL2_lengths)
-  num = 1
   tmp = []
   result = []
   for i in candidate:
     if(filter(i, SL2_lengths)):
-      print("{}th:\t Vertex Coordinate: {}\t Magnitude: {}".format(num, i, magnitude(i)))
-      num += 1
       tmp.append(i)
 
   maximum = magnitude(tmp[0])
@@ -212,7 +203,7 @@ def parse(SL2_lengths):
   
   return result
 
-def show_info(Vertices):
+def show_info(Vertices, all=False):
   if (not checkConvex(Vertices)):
     print("Convex Polygon, Please check your input vertices")
     return;
@@ -227,9 +218,13 @@ def show_info(Vertices):
 
   print("This is the array of SL2 length: \n{} \n\nFollowing shows the Packing vertices & its magnitude: ".format(sl2_length))
   Coordinates = parse(sl2_length)
-  for i in Coordinates:
-    show_graph(Vertices,sl2_length, i)
-
+  if (not all):
+    show_graph(Vertices, sl2_length, Coordinates[0])
+  else:
+    num = 1
+    for i in Coordinates:
+      show_graph(Vertices,sl2_length, i, "{}th Vertices Coordinates Set Graph".format(num))
+      num += 1
 
 if __name__ == "__main__":
-  print("No error, untilites function ready for usage")
+  print("No error, untilites functions ready for usage")

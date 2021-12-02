@@ -5,7 +5,7 @@ This repo is for saving the program for calculating, and showing the packing cap
 
 Intro Page:
 https://math.illinois.edu/research/igl/projects/fall/2021/toric-and-semitoric-packing-capacities
-
+![image](https://github.com/CoulsonZhang/Semi-toric_Packing_Capacity/blob/main/Image/UIUC_logo.png)
 
 ## Function Usage
 show_info(Vertices) is the entry function. (usage_entry.py)
@@ -38,5 +38,3 @@ def verifyDelzant(vert, nA, nB)
 def get_candidate(SL_length, k)
     Utilize k inequalities between lambdas and set (# of vertices - k) lambda as 0. The solve the matrix euqation to check whether there is a valid solution.
 
-
-![image](https://github.com/CoulsonZhang/Semi-toric_Packing_Capacity/blob/main/Image/UIUC_logo.png)

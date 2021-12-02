@@ -39,45 +39,4 @@ def get_candidate(SL_length, k)
     Utilize k inequalities between lambdas and set (# of vertices - k) lambda as 0. The solve the matrix euqation to check whether there is a valid solution.
 
 
-
-
-## The list of functions in utilities.py
-
-def checkConvex(vertices)
-As signature, this function is used to check whether the polygon is Convex
-
-def scale(vertices)
-If there is any decimal coordinates, scale the whole polygon into integer coordinates
-
-def show_graph(Vertices, sl2_length, set, tittle="")
-Generate the graph for the packing sitation. Third parameter is optional.
-
-def verifyDelzant(vert, nA, nB)
-As signature, check if the corner is Delzant corner
-
-def getSL(vert, nVert)
-As signature, get the size of SL2 length
-
-def get_edges(vertices)
-As signature, get the vector form of edges
-
-def get_candidate(SL_length, k)
-Using permuation to calculate all possible packing conditions, "k" represent the number of used inequality between lamdas.
-
-def magnitude(Vertex)
-Get the magniture of current packing area.
-
-def get_vertex(SL_length)
-Get all possible packing conditions by calling get_candidate function. Then sort all packing candidate by their own magnitude.
-
-def filter(vertex, SL2)
-Return True is the packing is resilient with SL2 length condition, otherwise, return False.
-
-def parse(SL2_lengths)
-Return all possible packing conditions which share the same maximum pakcing magnitude.
-
-def show_info(Vertices)
-Integerate all prompt messages and use all helper functions above for final information representation. 
-
-
 ![image](https://github.com/CoulsonZhang/Semi-toric_Packing_Capacity/blob/main/Image/UIUC_logo.png)

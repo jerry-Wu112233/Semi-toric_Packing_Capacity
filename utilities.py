@@ -6,14 +6,12 @@ from sympy import Point, Polygon
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon as polygon
 
-
-
 def checkConvex(vertices):
   polygon = Polygon(*map(Point, vertices))
   return polygon.is_convex()
 
 
-#version 1 (work but optimization needed)
+#If there is any decimal coordinates, scale the whole polygon into integer coordinates
 def scale(vertices):
   demoni = np.array([], dtype = int) #array for all denominator in Fraction form of corridinates
   nomi = np.array([], dtype=int) #arr for all nominator of corridiate after removing Fraction form
@@ -33,7 +31,7 @@ def scale(vertices):
 
   return vertices
 
-#To do: figure out how to show image with in a function (may save in local first and display at the end of program)
+#Generate the graph for the packing sitation. Third parameter is optional.
 def show_graph(Vertices, sl2_length, set, tittle=""):
   order_info = tittle.split(" ")[0]
   print("{} Vertex Coordinate: {}\t Magnitude: {}".format(order_info ,set, magnitude(set)))
@@ -47,9 +45,9 @@ def show_graph(Vertices, sl2_length, set, tittle=""):
 
       forward = i + 1 if i + 1 < len(set) else 0
       backward = i - 1 if i - 1 >= 0 else len(set) - 1
-      
       forward_vertex = np.array(Vertices[i]) + (set[i] / sl2_length[i]) * np.array([Vertices[forward][0] - Vertices[i][0], Vertices[forward][1] - Vertices[i][1]])
       backward_vertex = np.array(Vertices[i]) + (set[i] / sl2_length[backward]) * np.array([Vertices[backward][0] - Vertices[i][0], Vertices[backward][1] - Vertices[i][1]])
+      
       packing.append(forward_vertex)
       packing.append(backward_vertex)
       axes = plt.gca()
@@ -61,9 +59,7 @@ def show_graph(Vertices, sl2_length, set, tittle=""):
   plt.show()
 
 
-
-#Delzan Section
-#This function verifies the Delzant determinant condition for two edges (three vertices), returning true if the condition is met and false otherwise
+#Verifies the Delzant determinant condition for two edges (three vertices), returning true if the condition is met and false otherwise
 def verifyDelzant(vert, nA, nB):
   # compute the edges to compair
   edgeA = nA - vert
@@ -113,7 +109,6 @@ def get_edges(vertices):
       return False, sl2ZLengths
     else:
       sl2ZLengths[i] = getSL(vert, nA)
-  
   return True, sl2ZLengths
     
 
@@ -161,7 +156,7 @@ def get_candidate(SL_length, k):
           result.add(tuple(np.abs(candidate)))
   return result
 
-#wrap function for all possibilities for once
+#Get all possible packing conditions by calling get_candidate function. Then sort all packing candidate by their own magnitude.
 def get_vertex(SL_length):
   final = list()
   final.append(tuple(np.zeros(len(SL_length))))
@@ -173,6 +168,7 @@ def get_vertex(SL_length):
   
   return sorted(final, key=magnitude,reverse=True)
 
+#Calculate the maginitude of input packing area
 def magnitude(Vertex):
   sum = 0
   for v in Vertex:
@@ -180,14 +176,15 @@ def magnitude(Vertex):
   sum /= 2
   return sum
 
+#Return True is the packing is resilient with SL2 length condition, otherwise, return False.
 def filter(vertex, SL2):
   for i in range(len(vertex)):
     later = i + 1 if (i+1) < len(vertex) else 0
     if ((vertex[i]+vertex[later]) > SL2[i]):
-      return False;
-  return True;
+      return False
+  return True
 
-
+#Return all possible packing conditions which share the same maximum pakcing magnitude.
 def parse(SL2_lengths):
   candidate = get_vertex(SL2_lengths)
   tmp = []
@@ -203,18 +200,19 @@ def parse(SL2_lengths):
   
   return result
 
+#Integerate all prompt messages and use all helper functions above for final information representation.
 def show_info(Vertices, all=False):
   if (not checkConvex(Vertices)):
     print("Convex Polygon, Please check your input vertices")
-    return;
+    return
 
-  Vertices = scale(Vertices);
+  Vertices = scale(Vertices)
   # show_graph(Vertices)
   print("The 2D graph of polygon shows above\n")
   valid, sl2_length = get_edges(Vertices)
   if (not valid):
     print("Not Delzant, Please check your input vertices")
-    return;
+    return
 
   print("This is the array of SL2 length: \n{} \n\nFollowing shows the Packing vertices & its magnitude: ".format(sl2_length))
   Coordinates = parse(sl2_length)

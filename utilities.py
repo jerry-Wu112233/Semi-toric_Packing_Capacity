@@ -157,11 +157,11 @@ def get_candidate(SL_length, k):
   return result
 
 #Get all possible packing conditions by calling get_candidate function. Then sort all packing candidate by their own magnitude.
-def get_vertex(SL_length):
+def get_vertex(SL_lengths):
   final = list()
-  final.append(tuple(np.zeros(len(SL_length))))
-  for i in range(1, len(SL_length) + 1):
-    tmp = get_candidate(SL_length, i)
+  final.append(tuple(np.zeros(len(SL_lengths))))
+  for i in range(1, len(SL_lengths) + 1):
+    tmp = get_candidate(SL_lengths, i)
     for t in tmp:
       if t not in final:
         final.append(t)

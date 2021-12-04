@@ -25,17 +25,6 @@ vertices = np.array([[0,0],
                  [0,7]])
 ```
 Notice: decimal or negative input are accepted
-## Function Logics
-def scale(vertices):
-    Multiple each coordinate with LCM of all vertices coordinates.
 
-def show_graph(Vertices, sl2_length, set, tittle=""):
-    Get the ratio of SL2 length in packing condtion to the SL2 length of original line. Then find the all three vertices coordinates and the plot the triangular packing area.
-
-def verifyDelzant(vert, nA, nB)
-    Check whether the determinate of composed matrix has absolute value of 1.
-
-def get_candidate(SL_length, k)
-    Utilize k inequalities between lambdas and set (# of vertices - k) lambda as 0. The solve the matrix euqation to check whether there is a valid solution.
-
+## Flow Map
 ![image](https://github.com/CoulsonZhang/Semi-toric_Packing_Capacity/blob/main/Image/Flow.png)

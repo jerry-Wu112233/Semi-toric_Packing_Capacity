@@ -17,12 +17,10 @@ show_info(Input) will display all related information regarding the input list o
 
 For example, the 2D polygon with vertices: (0,0); (13,-13); (13,4); (12,5); (8,7); (0,7) will be in the form of:
 ```
-vertices = np.array([[0,0],
-                 [13,-13],
-                 [13,4],
-                 [12,5],
-                 [8,7],
-                 [0,7]])
+vertices = np.array([[0, 0], [13, -13], [13, 4],
+                     [12, 5], [8, 7], [0, 7]])
+
+utilities.show_info(vertices)
 ```
 Notice: decimal or negative input are accepted
 

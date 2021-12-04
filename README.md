@@ -38,3 +38,4 @@ def verifyDelzant(vert, nA, nB)
 def get_candidate(SL_length, k)
     Utilize k inequalities between lambdas and set (# of vertices - k) lambda as 0. The solve the matrix euqation to check whether there is a valid solution.
 
+![image](https://github.com/CoulsonZhang/Semi-toric_Packing_Capacity/blob/main/Image/Flow.png)

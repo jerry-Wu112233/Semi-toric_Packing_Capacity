@@ -7,6 +7,10 @@ Intro Page:
 https://math.illinois.edu/research/igl/projects/fall/2021/toric-and-semitoric-packing-capacities
 ![image](https://github.com/CoulsonZhang/Semi-toric_Packing_Capacity/blob/main/Image/UIUC_logo.png)
 
+
+## Program Flow Map
+![image](https://github.com/CoulsonZhang/Semi-toric_Packing_Capacity/blob/main/Image/Flow.png)
+
 ## Function Usage
 show_info(Vertices) is the entry function. (usage_entry.py)
 
@@ -24,5 +28,5 @@ utilities.show_info(vertices)
 ```
 Notice: decimal or negative input are accepted
 
-## Flow Map
-![image](https://github.com/CoulsonZhang/Semi-toric_Packing_Capacity/blob/main/Image/Flow.png)
+## Project Poster
+![image](https://github.com/CoulsonZhang/Semi-toric_Packing_Capacity/blob/main/Image/poster.png)

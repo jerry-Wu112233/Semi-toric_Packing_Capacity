@@ -201,7 +201,7 @@ def parse(SL2_lengths):
   return result
 
 #Integerate all prompt messages and use all helper functions above for final information representation.
-def show_info(Vertices, all=False):
+def get_info(Vertices, all=False):
   if (not checkConvex(Vertices)):
     print("Convex Polygon, Please check your input vertices")
     return

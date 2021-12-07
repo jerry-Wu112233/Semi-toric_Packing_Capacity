@@ -28,4 +28,5 @@ utilities.show_info(vertices)
 ```
 Notice: decimal or negative input are accepted
 
-
+## Project Poster
+![image](https://github.com/CoulsonZhang/Semi-toric_Packing_Capacity/blob/main/Image/poster.png)

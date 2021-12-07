@@ -7,9 +7,11 @@ Intro Page:
 https://math.illinois.edu/research/igl/projects/fall/2021/toric-and-semitoric-packing-capacities
 ![image](https://github.com/CoulsonZhang/Semi-toric_Packing_Capacity/blob/main/Image/UIUC_logo.png)
 
-## Function Usage
-### Flow Map
+
+## Program Flow Map
 ![image](https://github.com/CoulsonZhang/Semi-toric_Packing_Capacity/blob/main/Image/Flow.png)
+
+## Function Usage
 show_info(Vertices) is the entry function. (usage_entry.py)
 
 By default, it shows one maximum situation. To show all possibilities, use show_info(Vertices, all = True) OR show_info(Vertices, True).

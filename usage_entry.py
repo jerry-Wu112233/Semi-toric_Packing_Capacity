@@ -11,6 +11,4 @@ if __name__ == "__main__":
     #                 )
     # utilities.show_info(test, False)
 
-    test = np.array([[0, 0], [13, -13], [13, 4],
-                     [12, 5], [8, 7], [0, 7]])
-    utilities.show_info(test)
+

@@ -16,7 +16,7 @@ show_info(Vertices) is the entry function. (usage_entry.py)
 By default, it shows one maximum situation. To show all possibilities, use show_info(Vertices, all = True) OR show_info(Vertices, True).
 
 Input: 2D np array for list of vertices in Counterclockwise order
-show_info(Input) will display all related information regarding the input list of vertices
+get_info(Input) will display all related information regarding the input list of vertices
 
 For example, the 2D polygon with vertices: (0,0); (13,-13); (13,4); (12,5); (8,7); (0,7) will be in the form of:
 ```

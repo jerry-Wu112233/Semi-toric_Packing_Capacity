@@ -113,6 +113,7 @@ def get_edges(vertices):
     
 
 
+
 #SL_length is the array contains the SL2 length
 #ieq_idx contains the information for inequality. 2d array, each row represent one inequality
 #ie: [i,j,idx] lamda_i + lamda_j ≤ SL2_idx 
@@ -155,6 +156,8 @@ def get_candidate(SL_length, k):
         else:
           result.add(tuple(np.abs(candidate)))
   return result
+
+
 
 #Get all possible packing conditions by calling get_candidate function. Then sort all packing candidate by their own magnitude.
 def get_vertex(SL_lengths):
@@ -200,10 +203,55 @@ def parse(SL2_lengths):
   
   return result
 
+def alternating_edge(SL2_lengths):
+  # initilize flags
+  f_odd = True
+  f_even = True
+  b_odd = True
+  b_even = True
+
+  n = SL2_lengths.shape
+  for i in range(n):
+    # if I is odd
+    if i % 2:
+      # forward condition broken
+      if SL2_lengths[i] > SL2_lengths[i+1]:
+        f_odd = False
+      # backward condition broken
+      if SL2_lengths[i] > SL2_lengths[i+1]:
+        b_odd = False
+    # else i is even
+    else:
+      # forward condition broken
+      if SL2_lengths[i] > SL2_lengths[i+1]:
+        f_even = False
+      # backward condition broken
+      if SL2_lengths[i] > SL2_lengths[i+1]:
+        b_even = False
+    # else i is even
+  
+  results = []
+  # No alternating edge conditions are satisfied.
+  if f_odd == f_even == b_odd == b_even == False:
+    return False
+  else:
+    # if an odd edge condition is met, set all of the even entries to zero
+    if f_odd or b_odd:
+      tmp = np.zeros(n)
+      tmp[1::2] = SL2_lengths[1::2]
+      results.append(tmp)
+    # if an even edge condition is met, set all of the odd entries to zero
+    if f_even or b_even:
+      tmp = np.zeros(n)
+      tmp[0::2] = SL2_lengths[0::2]
+      results.append(tmp)
+    return True, results
+
 #Integerate all prompt messages and use all helper functions above for final information representation.
 def get_info(Vertices, all=False):
   if (not checkConvex(Vertices)):
-    print("Convex Polygon, Please check your input vertices")
+    # changed this to read Non-Convex ...
+    print("Non-Convex Polygon, Please check your input vertices")
     return
 
   Vertices = scale(Vertices)
@@ -215,7 +263,12 @@ def get_info(Vertices, all=False):
     return
 
   print("This is the array of SL2 length: \n{} \n\nFollowing shows the Packing vertices & its magnitude: ".format(sl2_length))
-  Coordinates = parse(sl2_length)
+  # check if alternating edge condition is true
+  # if so, use the effiecent algorithm!
+  if alternating_edge[0]:
+    Coordinates = alternating_edge[1]
+  else:
+    Coordinates = parse(sl2_length)
   if (not all):
     show_graph(Vertices, sl2_length, Coordinates[0])
   else:

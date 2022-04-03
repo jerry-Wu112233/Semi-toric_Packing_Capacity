@@ -135,8 +135,24 @@ def get_edges(vertices):
       sl2ZLengths[i] = getSL(vert, nA)
   return True, sl2ZLengths
     
-
-
+#Computes the constraint for a single fake semitoric corner. vS is the semitoric corner of interest.
+#vA is the corner next to vS, and vB is the corner next to vA on the other side.
+#order is used to determine whether vA and vB is to the clockwise(True) or counterclockwise(False) direction of vS.
+def fakeConstraint(vA, vB, vS, order):
+  if order == True:
+    SL = getSL(vA[:2], vS[:2])
+    edgeA = vS - vA
+    edgeA = edgeA / np.gcd(edgeA[0], edgeA[1])
+    edgeB = vB - vA
+    edgeB = edgeB / np.gcd(edgeB[0], edgeB[1])
+    return SL - vS[2] * (edgeA[0] - edgeB[0])
+  else:
+    SL = getSL(vS[:2], vA[:2])
+    edgeA = vS - vA
+    edgeA = edgeA / np.gcd(edgeA[0], edgeA[1])
+    edgeB = vB - vA
+    edgeB = edgeB / np.gcd(edgeB[0], edgeB[1])
+    return SL + vS[2] * (edgeA[0] - edgeB[0])
 
 #SL_length is the array contains the SL2 length
 #ieq_idx contains the information for inequality. 2d array, each row represent one inequality

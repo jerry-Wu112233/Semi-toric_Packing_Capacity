@@ -250,30 +250,30 @@ def alternating_edge(SL2_lengths):
   b_odd = True
   b_even = True
 
-  n = SL2_lengths.shape
+  n = SL2_lengths.shape[0]
   for i in range(n):
     # if I is odd
     if i % 2:
       # forward condition broken
-      if SL2_lengths[i] > SL2_lengths[i+1]:
+      if SL2_lengths[i] > SL2_lengths[(i+1) % n]:
         f_odd = False
       # backward condition broken
-      if SL2_lengths[i] > SL2_lengths[i+1]:
+      if SL2_lengths[i] > SL2_lengths[(i+1) % n]:
         b_odd = False
     # else i is even
     else:
       # forward condition broken
-      if SL2_lengths[i] > SL2_lengths[i+1]:
+      if SL2_lengths[i] > SL2_lengths[(i+1) % n]:
         f_even = False
       # backward condition broken
-      if SL2_lengths[i] > SL2_lengths[i+1]:
+      if SL2_lengths[i] > SL2_lengths[(i+1) % n]:
         b_even = False
     # else i is even
   
   results = []
   # No alternating edge conditions are satisfied.
   if f_odd == f_even == b_odd == b_even == False:
-    return False
+    return False, []
   else:
     # if an odd edge condition is met, set all of the even entries to zero
     if f_odd or b_odd:
@@ -305,8 +305,9 @@ def get_info(Vertices, all=False):
   print("This is the array of SL2 length: \n{} \n\nFollowing shows the Packing vertices & its magnitude: ".format(sl2_length))
   # check if alternating edge condition is true
   # if so, use the effiecent algorithm!
-  if alternating_edge[0]:
-    Coordinates = alternating_edge[1]
+  alt_edge = alternating_edge(sl2_length)
+  if alt_edge[0]:
+    Coordinates = alt_edge[1]
   else:
     Coordinates = parse(sl2_length)
   if (not all):

@@ -139,6 +139,8 @@ def get_edges(vertices):
 #Computes the constraint for a single fake semitoric corner. vS is the semitoric corner of interest.
 #vA is the corner next to vS, and vB is the corner next to vA on the other side.
 #order is used to determine whether vA and vB is to the clockwise(True) or counterclockwise(False) direction of vS.
+#For example, in the minimal model of [-4,0,0]-[4,0,0]-[0,2,1], packing the corner [4,0,0] is to the
+#clockwise direction of the semitoric corner, so use True.
 def fakeConstraint(vA, vB, vS, order):
   if order == True:
     SL = getSL(vA[:2], vS[:2])

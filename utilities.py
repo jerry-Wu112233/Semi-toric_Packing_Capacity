@@ -79,6 +79,7 @@ def verifyDelzant(vert, nA, nB):
 #Returns "Hidden" if the vertex is a hidden corner
 #Returns "Fake" if the vertex is a fake corner
 #Returns "None" if the vertex is not a semitoric corner
+#Input must be integer
 def verifySemitoric(vert, nA, nB):
   # compute the edges to compair
   edgeA = nA - vert

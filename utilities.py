@@ -13,19 +13,24 @@ def checkConvex(vertices):
 
 #If there is any decimal coordinates, scale the whole polygon into integer coordinates
 def scale(vertices):
-  demoni = np.array([], dtype = int) #array for all denominator in Fraction form of corridinates
-  nomi = np.array([], dtype=int) #arr for all nominator of corridiate after removing Fraction form
-  for vertice in vertices: #add all denominator in the demoni np array
+  coordinates = vertices[:, :2]
+  for vertex in vertices:
+    if vertex[2] != 0:
+      coordinates = np.append(coordinates, [[vertex[0], vertex[1] - vertex[2]]], axis=0)
+
+  demoni = np.array([], dtype=int)  # array for all denominator in Fraction form of corridinates
+
+  for vertice in coordinates:  # add all denominator in the demoni np array
     for cor in vertice:
       cor = Fraction(cor)
       demoni = np.append(demoni, int(cor.denominator))
-      
-  lcm = np.lcm.reduce(demoni) #calculate the lcm for all demoni
 
-  for vertice in vertices: #multiply corridinate with lcm to remove the Fraction form
+  lcm = np.lcm.reduce(demoni)  # calculate the lcm for all demoni
+
+  for vertice in vertices:  # multiply corridinate with lcm to remove the Fraction form
     vertice *= lcm
   vertices = vertices.astype(int)
-  for i in range(len(vertices)): # use floor division to convert 
+  for i in range(len(vertices)):  # use floor division to convert
     for j in range(len(vertices[i])):
       vertices[i][j] = int(vertices[i][j]) // 1
 
@@ -199,8 +204,6 @@ def get_candidate(SL_length, k):
         else:
           result.add(tuple(np.abs(candidate)))
   return result
-
-
 
 #Get all possible packing conditions by calling get_candidate function. Then sort all packing candidate by their own magnitude.
 def get_vertex(SL_lengths):
